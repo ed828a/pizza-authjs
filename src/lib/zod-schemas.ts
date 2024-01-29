@@ -6,7 +6,7 @@ export const CredentialSigninSchema = z.object({
   code: z.optional(z.string()),
 });
 
-export const LoginSchema = z.object({
+export const EmailSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address",
   }),
