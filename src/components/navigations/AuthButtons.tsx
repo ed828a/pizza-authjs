@@ -18,7 +18,7 @@ const AuthButtons = (props: Props) => {
         <UserButton />
       ) : (
         <>
-          <Link className={cn(buttonVariants())} href={"/auth/signin"}>
+          <Link className={cn(buttonVariants())} href={"/auth/login"}>
             Sign in
           </Link>
           <Link className={cn(buttonVariants())} href={"/auth/register"}>

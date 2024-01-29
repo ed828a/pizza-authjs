@@ -7,6 +7,10 @@ type Props = {
 };
 
 const NewVerificationPage = async ({ searchParams: { token } }: Props) => {
+  // await new Promise((resolve, reject) => {
+  //   setTimeout(resolve, 3000);
+  // });
+
   const existingToken = await prisma.verificationToken.findUnique({
     where: { token },
   });

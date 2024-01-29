@@ -72,7 +72,7 @@ const EmailLoginForm = (props: Props) => {
         <ErrorMessageBox message={errorMessage} />
         <SuccessMessageBox message={successMessage} />
         <LoadingButton type="submit" className="w-full" isLoading={isPending}>
-          Log in
+          Login With Email
         </LoadingButton>
       </form>
     </Form>

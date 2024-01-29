@@ -1,9 +1,13 @@
-import React from "react";
+import LoginCard from "@/components/auth/LoginCard";
 
 type Props = {};
 
 const LoginPage = (props: Props) => {
-  return <div>LoginPage</div>;
+  return (
+    <div className="w-full flex justify-center">
+      <LoginCard />
+    </div>
+  );
 };
 
 export default LoginPage;

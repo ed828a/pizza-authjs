@@ -30,7 +30,7 @@ const UserButton = (props: Props) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-40" align="end">
         <LogoutButton>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="dark:hover:text-primary-foreground dark:hover:border-primary-foreground dark:hover:border dark:hover:bg-primary">
             <ExitIcon className="w-4 h-4 mr-2" />
             Logout
           </DropdownMenuItem>

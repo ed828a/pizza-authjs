@@ -4,11 +4,16 @@ import bcrypt from "bcryptjs";
 import * as z from "zod";
 
 import { signIn, signOut } from "./auth";
-import { EmailSchema, RegisterSchema } from "./zod-schemas";
+import {
+  CredentialSigninSchema,
+  EmailSchema,
+  RegisterSchema,
+} from "./zod-schemas";
 import prisma from "./database";
-import { generateVerificationToken } from "./tokens";
-import { sendVerificationEmail } from "./mailer";
+import { generateTwoFactorToken, generateVerificationToken } from "./tokens";
+import { sendTwoFactorTokenEmail, sendVerificationEmail } from "./mailer";
 import { AuthError } from "next-auth";
+import { DEFAULT_LOGIN_REDIRECT } from "./routes";
 
 export const logout = async () => {
   await signOut();
@@ -64,13 +69,118 @@ export const emailLogin = async (
   console.log("email", email);
 
   try {
-    await signIn("email", { email, redirect: true });
+    await signIn("email", {
+      email,
+      redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
+    });
   } catch (error) {
     if (error instanceof AuthError) {
       console.log(error);
       switch (error.type) {
         case "EmailSignInError":
           return { error: `Email SignIn Error: ${error.message}` };
+        default:
+          return { error: "Something went wrong!" };
+      }
+    }
+
+    throw error; // if not throw error, next-auth doesn't redirect
+  }
+
+  return { success: "Email sent!" };
+};
+
+export const credentialsLogin = async (
+  values: z.infer<typeof CredentialSigninSchema>,
+  callbackUrl?: string | null
+) => {
+  const validatedFields = CredentialSigninSchema.safeParse(values);
+
+  if (!validatedFields.success) {
+    return { error: "Invalid fields!" };
+  }
+
+  const { email, password, code } = validatedFields.data;
+
+  const existingUser = await prisma.user.findUnique({ where: { email } });
+
+  if (!existingUser || !existingUser.email || !existingUser.password) {
+    return { error: "User with this email doesn't exist!" };
+  }
+
+  if (!existingUser.emailVerified) {
+    const verificationToken = await generateVerificationToken(
+      existingUser.email
+    );
+
+    // send email with verificationToken
+    await sendVerificationEmail(email, verificationToken.token);
+
+    return { success: "Confirmation Email sent!" };
+  }
+
+  if (existingUser.isTwoFactorEnabled && existingUser.email) {
+    if (code) {
+      const twoFactorToken = await prisma.twoFactorToken.findFirst({
+        where: { email: existingUser.email },
+      });
+
+      if (!twoFactorToken) {
+        return { error: "Invalid code!" };
+      }
+
+      if (twoFactorToken.token !== code) {
+        return { error: "Code mismatched!" };
+      }
+
+      const hasExpired = new Date(twoFactorToken.expires) < new Date();
+      if (hasExpired) {
+        // delete expired token
+        await prisma.twoFactorToken.delete({
+          where: { id: twoFactorToken.id },
+        });
+
+        return { error: "Code expired!" };
+      }
+
+      // when 2FA is valid, still remove twoFactorToken
+      await prisma.twoFactorToken.delete({ where: { id: twoFactorToken.id } });
+
+      const existingConfirmation =
+        await prisma.twoFactorConfirmation.findUnique({
+          where: { userId: existingUser.id },
+        });
+
+      if (existingConfirmation) {
+        await prisma.twoFactorConfirmation.delete({
+          where: { id: existingConfirmation.id },
+        });
+      }
+
+      await prisma.twoFactorConfirmation.create({
+        data: {
+          userId: existingUser.id,
+        },
+      });
+    } else {
+      const twoFactorToken = await generateTwoFactorToken(existingUser.email);
+      await sendTwoFactorTokenEmail(existingUser.email, twoFactorToken.token);
+
+      return { twoFactor: true };
+    }
+  }
+
+  try {
+    await signIn("credentials", {
+      email,
+      password,
+      redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
+    });
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return { error: "Invalid credentials!" };
         default:
           return { error: "Something went wrong!" };
       }

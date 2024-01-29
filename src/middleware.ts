@@ -9,6 +9,9 @@ export default auth((req) => {
   if (nextUrl.pathname === "/register")
     return Response.redirect(new URL("/auth/register", nextUrl));
 
+  if (nextUrl.pathname === "/login" || nextUrl.pathname === "/signin")
+    return Response.redirect(new URL("/auth/login", nextUrl));
+
   return null;
 });
 
