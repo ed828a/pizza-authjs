@@ -4,9 +4,9 @@ type Props = {};
 
 const LoginPage = (props: Props) => {
   return (
-    <div className="w-full flex justify-center">
+    <section className="pagewrapper">
       <LoginCard />
-    </div>
+    </section>
   );
 };
 

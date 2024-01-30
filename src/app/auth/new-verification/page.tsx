@@ -55,7 +55,7 @@ const NewVerificationPage = async ({ searchParams: { token } }: Props) => {
   }
 
   return (
-    <div className="w-full h-full flex justify-center items-center shadow-2xl">
+    <div className="pagewrapper shadow-2xl">
       <NewVerificationForm message={message} success={success} />
     </div>
   );

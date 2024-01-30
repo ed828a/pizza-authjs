@@ -80,3 +80,7 @@ body,
     @apply text-foreground bg-background;
   }
 }
+
+.pagewrapper {
+  @apply w-full grow flex justify-center items-center;
+}

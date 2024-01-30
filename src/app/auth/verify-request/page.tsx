@@ -9,7 +9,7 @@ const VerifyRequestPage = (props: Props) => {
   const domain = headersList.get("host") || "";
 
   return (
-    <div className="w-full h-full flex justify-center items-center">
+    <div className="pagewrapper">
       <CardWrapper
         headerLabel="Check your email"
         backButtonHref="/"

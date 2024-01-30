@@ -6,7 +6,7 @@ type Props = {};
 
 const NewVerificationPageLoading = (props: Props) => {
   return (
-    <div className="w-full h-full flex justify-center items-center shadow-2xl">
+    <div className="pagewrapper shadow-2xl">
       <CardWrapper
         headerLabel="Confirm you verification"
         backButtonLabel="Back to login"

@@ -6,7 +6,7 @@ type Props = {};
 
 const NewPasswordPage = (props: Props) => {
   return (
-    <div className="w-full h-full flex justify-center items-center ">
+    <section className="pagewrapper">
       <CardWrapper
         headerLabel="Enter a new password"
         backButtonLabel="Back to login"
@@ -14,7 +14,7 @@ const NewPasswordPage = (props: Props) => {
       >
         <NewPasswordForm />
       </CardWrapper>
-    </div>
+    </section>
   );
 };
 

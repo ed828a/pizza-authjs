@@ -8,7 +8,7 @@ type Props = {
 const AuthErrorPage = ({ searchParams: { error } }: Props) => {
   if (error === "Verification") {
     return (
-      <div className="w-full h-full flex justify-center items-center">
+      <section className="pagewrapper">
         <CardWrapper
           headerLabel="Unable to sign in"
           backButtonHref="/auth/login"
@@ -20,11 +20,11 @@ const AuthErrorPage = ({ searchParams: { error } }: Props) => {
           <p className="text-center">It may have been used already or</p>
           <p className="text-center">it may have expired</p>
         </CardWrapper>
-      </div>
+      </section>
     );
   } else {
     return (
-      <div className="w-full h-full flex justify-center items-center">
+      <section className="pagewrapper">
         <CardWrapper
           headerLabel="Unable to sign in"
           backButtonHref="/auth/login"
@@ -32,7 +32,7 @@ const AuthErrorPage = ({ searchParams: { error } }: Props) => {
         >
           <p className="text-center text-lg mb-4">{error}</p>
         </CardWrapper>
-      </div>
+      </section>
     );
   }
 };

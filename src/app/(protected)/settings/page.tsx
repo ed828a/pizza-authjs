@@ -36,7 +36,7 @@ const SettingsPage = async (props: Props) => {
   };
 
   return (
-    <div className="w-full h-full flex justify-center items-start pt-8 ">
+    <section className="pagewrapper mt-8">
       <Card className="w-[600px]">
         <CardHeader>
           <div className="flex justify-center items-center gap-4">
@@ -48,7 +48,7 @@ const SettingsPage = async (props: Props) => {
           <SettingsForm user={clientUser} />
         </CardContent>
       </Card>
-    </div>
+    </section>
   );
 };
 
