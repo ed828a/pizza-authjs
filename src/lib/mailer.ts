@@ -25,6 +25,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const domain = process.env.NEXT_PUBLIC_APP_URL;
+console.log("process.env.NEXT_PUBLIC_APP_URL", process.env.NEXT_PUBLIC_APP_URL);
 
 export const sendVerificationEmail = async (email: string, token: string) => {
   const confirmLink = `${domain}/auth/new-verification?token=${token}`;
