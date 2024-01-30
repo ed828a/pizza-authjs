@@ -46,7 +46,7 @@ const CredentialsLoginForm = (props: Props) => {
 
   const handleStartover = () => {
     form.reset();
-    router.replace("/auth/login");
+    router.refresh();
   };
 
   const onSubmit = (values: z.infer<typeof CredentialSigninSchema>) => {
@@ -115,7 +115,7 @@ const CredentialsLoginForm = (props: Props) => {
                       onClick={() => handleStartover()}
                       className="cursor-pointer text-gray-500 text-sm"
                     >
-                      lost the code? start over login
+                      The code expired? let&apos;s start over login
                     </p>
                   </FormItem>
                 );

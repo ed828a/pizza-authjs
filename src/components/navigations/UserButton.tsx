@@ -10,7 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { AvatarIcon, ExitIcon } from "@radix-ui/react-icons";
 import { FaRegUser } from "react-icons/fa";
 import { useSession } from "next-auth/react";
-import { Settings } from "lucide-react";
+import { Settings, Users } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { logout } from "@/lib/server-actions";
 
@@ -36,6 +36,13 @@ const UserButton = (props: Props) => {
           <Settings className="mr-2 h-4 w-4" />
           <span>Settings</span>
         </DropdownMenuItem>
+
+        {session?.user.role === "ADMIN" && (
+          <DropdownMenuItem onClick={() => router.push("/admin/users")}>
+            <Users className="mr-2 h-4 w-4" />
+            <span>Users</span>
+          </DropdownMenuItem>
+        )}
 
         <DropdownMenuItem
           onClick={async () => {

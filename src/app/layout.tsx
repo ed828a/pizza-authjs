@@ -3,6 +3,7 @@ import "./globals.css";
 import Providers from "@/components/providers/Providers";
 import TopNavbar from "@/components/navigations/TopNavbar";
 import { inter } from "@/lib/utils";
+import ToastContainerWrapper from "@/components/share/ToastContainerWrapper";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +19,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <main className="h-full flex flex-col">
+          <main className="h-full flex flex-col min-w-80">
+            {/* <ToastContainerWrapper /> */}
             <TopNavbar />
             {children}
           </main>

@@ -13,7 +13,7 @@ const SettingsPage = async (props: Props) => {
   console.log("session", session);
 
   if (!session) {
-    redirect("/auth/login");
+    redirect("/auth/login?error=unauthenticated");
   }
 
   const user = await prisma.user.findFirst({
