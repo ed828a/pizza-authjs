@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <main className="border border-yellow-300 h-full">
+          <main className="h-full">
             <TopNavbar />
             {children}
           </main>
