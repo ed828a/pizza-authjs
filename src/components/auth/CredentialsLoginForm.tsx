@@ -17,10 +17,8 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import FormError from "../share/MessageErrorBox";
 import FormSuccess from "../share/MessageSuccessBox";
-
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import LoadingSpinner from "../share/LoadingSpinner";
 import { CredentialSigninSchema } from "@/lib/zod-schemas";
 import { credentialsLogin } from "@/lib/server-actions";
 import LoadingButton from "../share/LoadingButton";
@@ -60,6 +58,8 @@ const CredentialsLoginForm = (props: Props) => {
     startTransition(() => {
       credentialsLogin(values, callbackUrl)
         .then((data) => {
+          console.log("credentialsLogin data", data);
+
           if (data?.error) {
             if (data.error !== "Code mismatched!") {
               form.reset();
@@ -73,6 +73,7 @@ const CredentialsLoginForm = (props: Props) => {
 
           if (data?.twoFactor) {
             setShowTwoFactor(true);
+            setSuccessMessage("Please check your email for Two Factor Code.");
           }
         })
         .catch((error) => {
@@ -93,27 +94,32 @@ const CredentialsLoginForm = (props: Props) => {
             <FormField
               control={form.control}
               name="code"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Two Factor Code</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="654321"
-                      type="text"
-                      disabled={isPending}
-                      autoComplete="off"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                  <p
-                    onClick={() => handleStartover()}
-                    className="cursor-pointer text-gray-500 text-sm"
-                  >
-                    lost the code? start over login
-                  </p>
-                </FormItem>
-              )}
+              render={({ field }) => {
+                // console.log("Two Factor Code field", field);
+                field.value = field.value ?? "";
+
+                return (
+                  <FormItem>
+                    <FormLabel>Two Factor Code</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="654321"
+                        type="text"
+                        disabled={isPending}
+                        autoComplete="off"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                    <p
+                      onClick={() => handleStartover()}
+                      className="cursor-pointer text-gray-500 text-sm"
+                    >
+                      lost the code? start over login
+                    </p>
+                  </FormItem>
+                );
+              }}
             />
           )}
           {!showTwoFactor && (
@@ -158,7 +164,9 @@ const CredentialsLoginForm = (props: Props) => {
                       asChild
                       className="px-0 font-normal"
                     >
-                      <Link href={"/auth/reset"}>Forgot Password</Link>
+                      <Link href={"/auth/reset"} className="text-xs">
+                        Forgot Password
+                      </Link>
                     </Button>
                     <FormMessage />
                   </FormItem>

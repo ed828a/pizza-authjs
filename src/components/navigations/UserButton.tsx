@@ -10,12 +10,15 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { AvatarIcon, ExitIcon } from "@radix-ui/react-icons";
 import { FaRegUser } from "react-icons/fa";
 import { useSession } from "next-auth/react";
-import LogoutButton from "./LogoutButton";
+import { Settings } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { logout } from "@/lib/server-actions";
 
 type Props = {};
 
 const UserButton = (props: Props) => {
   const { data: session } = useSession();
+  const router = useRouter();
 
   return (
     <DropdownMenu>
@@ -29,12 +32,19 @@ const UserButton = (props: Props) => {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-40" align="end">
-        <LogoutButton>
-          <DropdownMenuItem className="dark:hover:text-primary-foreground dark:hover:border-primary-foreground dark:hover:border dark:hover:bg-primary">
-            <ExitIcon className="w-4 h-4 mr-2" />
-            Logout
-          </DropdownMenuItem>
-        </LogoutButton>
+        <DropdownMenuItem onClick={() => router.push("/settings")}>
+          <Settings className="mr-2 h-4 w-4" />
+          <span>Settings</span>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem
+          onClick={async () => {
+            await logout();
+          }}
+        >
+          <ExitIcon className="w-4 h-4 mr-2" />
+          Logout
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

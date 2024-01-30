@@ -86,4 +86,97 @@ export const {
   ],
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
+  events: {
+    async linkAccount({ user }) {
+      // Sent when an account in a given provider is linked to a user in our user database.
+      console.log("linkAccount event called");
+      await prisma.user.update({
+        where: { id: user.id },
+        data: { emailVerified: new Date() }, // this can't be boolean for furture check.
+      });
+    },
+  },
+  callbacks: {
+    async signIn({ user, account }) {
+      console.log("callback signIn", { user, account });
+
+      // todo: add a check if the provider is one of my settings in authConfig.
+
+      // Allow OAuth without email verification
+      if (account?.provider !== "credentials") return true;
+
+      // Prevent sign in without email verification
+      if (user.id) {
+        const existingUser = await prisma.user.findUnique({
+          where: { id: user.id },
+        });
+        if (!existingUser || !existingUser.emailVerified) {
+          return false;
+        }
+
+        if (existingUser.isTwoFactorEnabled) {
+          const twoFactorConfirmation =
+            await prisma.twoFactorConfirmation.findUnique({
+              where: { userId: existingUser.id },
+            });
+
+          console.log("twoFactorConfirmation", twoFactorConfirmation);
+
+          if (!twoFactorConfirmation) {
+            return false;
+          }
+
+          // Delete two factor confirmation for next sign in. in order words, every signin must be 2FA
+          await prisma.twoFactorConfirmation.delete({
+            where: { id: twoFactorConfirmation.id },
+          });
+        }
+      }
+
+      return true;
+    },
+    async jwt({ token, user }) {
+      console.log("callback jwt:", { token, user }); // token.sub is the user.id
+
+      if (!token.sub) return token;
+
+      const existingUser = await prisma.user.findFirst({
+        where: { id: token.sub },
+      });
+      if (!existingUser) return token;
+
+      const existingAccount = await prisma.account.findFirst({
+        where: { userId: existingUser.id },
+      });
+
+      token.isOAuth = !!existingAccount;
+      token.name = existingUser.name;
+      token.email = existingUser.email;
+      token.role = existingUser.role;
+      token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
+
+      return token;
+    },
+
+    //@ts-expect-error
+    async session({ session, token }) {
+      console.log("callback session: ", { session, token });
+
+      if (token.sub && session.user) {
+        session.user.id = token.sub;
+      }
+
+      if (token.role && session.user) {
+        session.user.role = token.role;
+      }
+      if (session.user) {
+        session.user.isTwoFactorEnabled = token.isTwoFactorEnabled;
+        session.user.name = token.name;
+        session.user.email = token.email;
+        session.user.isOAuth = token.isOAuth;
+      }
+
+      return session;
+    },
+  },
 });
