@@ -175,8 +175,11 @@ export const credentialsLogin = async (
       });
     } else {
       const twoFactorToken = await generateTwoFactorToken(existingUser.email);
-      await sendTwoFactorTokenEmail(existingUser.email, twoFactorToken.token);
-
+      const result = await sendTwoFactorTokenEmail(
+        existingUser.email,
+        twoFactorToken.token
+      );
+      console.log("credentialsLogin result ", result);
       return { twoFactor: true };
     }
   }

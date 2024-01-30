@@ -90,12 +90,24 @@ export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
     }),
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log(error); // if anything goes wrong an error will show up in your terminal.
-    } else {
-      console.log(`Message sent: ${info.messageId}`); // if it's a success, a confirmation will show up in your terminal.
-    }
+  // transporter.sendMail(mailOptions, (error, info) => {
+  //   if (error) {
+  //     console.log(error); // if anything goes wrong an error will show up in your terminal.
+  //   } else {
+  //     console.log(`Message sent: ${info.messageId}`); // if it's a success, a confirmation will show up in your terminal.
+  //   }
+  // });
+  return await new Promise((resolve, reject) => {
+    // send mail
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error); // if anything goes wrong an error will show up in your terminal.
+        reject(error);
+      } else {
+        console.log(`Message sent: ${info.messageId}`); // if it's a success, a confirmation will show up in your terminal.
+        resolve(info);
+      }
+    });
   });
 };
 
