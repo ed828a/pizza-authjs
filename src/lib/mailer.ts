@@ -43,12 +43,16 @@ export const sendVerificationEmail = async (email: string, token: string) => {
     }),
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log("sendMail Error:", error); // if anything goes wrong an error will show up in your terminal.
-    } else {
-      console.log(`Message sent: ${info.messageId}`); // if it's a success, a confirmation will show up in your terminal.
-    }
+  return await new Promise((resolve, reject) => {
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log("sendVerificationEmail sendMail Error:", error); // if anything goes wrong an error will show up in your terminal.
+        reject(error);
+      } else {
+        console.log(`sendVerificationEmail Message sent: ${info.messageId}`); // if it's a success, a confirmation will show up in your terminal.
+        resolve(info);
+      }
+    });
   });
 };
 
@@ -68,12 +72,16 @@ export const sendPasswordResetEmail = async (email: string, token: string) => {
     }),
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log(error); // if anything goes wrong an error will show up in your terminal.
-    } else {
-      console.log(`Message sent: ${info.messageId}`); // if it's a success, a confirmation will show up in your terminal.
-    }
+  return await new Promise((resolve, reject) => {
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log("sendPasswordResetEmail sendMail Error:", error); // if anything goes wrong an error will show up in your terminal.
+        reject(error);
+      } else {
+        console.log(`sendPasswordResetEmail Message sent: ${info.messageId}`); // if it's a success, a confirmation will show up in your terminal.
+        resolve(info);
+      }
+    });
   });
 };
 
