@@ -143,6 +143,7 @@ const SettingsForm = ({ user }: Props) => {
                         placeholder="*******"
                         type="password"
                         autoComplete="off"
+                        required={false}
                       />
                     </FormControl>
                     <FormMessage />
