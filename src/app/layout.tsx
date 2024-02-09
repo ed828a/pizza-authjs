@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <main className="h-full flex flex-col min-w-80">
-            {/* <ToastContainerWrapper /> */}
+            <ToastContainerWrapper />
             <TopNavbar />
             {children}
           </main>

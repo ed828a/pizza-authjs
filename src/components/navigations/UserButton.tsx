@@ -13,6 +13,7 @@ import { useSession } from "next-auth/react";
 import { Settings, Users } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { logout } from "@/lib/server-actions";
+import { CgProfile } from "react-icons/cg";
 
 type Props = {};
 
@@ -32,6 +33,10 @@ const UserButton = (props: Props) => {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-40" align="end">
+        <DropdownMenuItem onClick={() => router.push("/profile")}>
+          <CgProfile className="mr-2 h-4 w-4" />
+          <span>profile</span>
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={() => router.push("/settings")}>
           <Settings className="mr-2 h-4 w-4" />
           <span>Settings</span>

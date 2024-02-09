@@ -23,3 +23,31 @@ export type SettingsUser = {
   isTwoFactorEnabled: boolean;
   isOAuth: boolean;
 };
+
+type ProfileType = {
+  name: string;
+  email: string;
+  emailVerified: boolean | null;
+  image: string | null;
+  phone: string;
+  streetAddress: string;
+  city: string;
+  postcode: string;
+  country: string;
+  role: UserRole;
+  isTwoFactorEnabled: boolean;
+  isOAuth: boolean;
+};
+
+type TProfileState = {
+  errors?: {
+    name?: string[];
+    phone?: string[];
+    streetAddress?: string[];
+    city?: string[];
+    postcode?: string[];
+    country?: string[];
+    role?: string[];
+  };
+  message?: string | null;
+};

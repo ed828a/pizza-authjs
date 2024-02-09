@@ -25,6 +25,12 @@ model User {
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
   accounts              Account[]
+  phone                 String?
+  streetAddress         String?
+  city                  String?
+  postcode              String?
+  country               String?
+  isOAuth               Boolean                @default(false)
 }
 
 model VerificationToken {

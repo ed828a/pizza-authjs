@@ -5,7 +5,13 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-import { Inter, Merriweather } from "next/font/google";
+import { Inter, Merriweather, Dancing_Script } from "next/font/google";
+
+export const dancingScript = Dancing_Script({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  style: ["normal"],
+});
 
 export const inter = Inter({ subsets: ["latin"] });
 
@@ -14,6 +20,12 @@ export const merriweather = Merriweather({
   weight: ["700", "900"],
   style: ["italic", "normal"],
 });
+
+export const phoneRegex = new RegExp(
+  /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
+);
+
+const postcodeRegex = new RegExp(/^[0-9]{4}$/);
 
 /**
  * Email HTML body

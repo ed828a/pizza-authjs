@@ -9,7 +9,10 @@ export interface LoadingButtonProps
 }
 
 const LoadingButton = React.forwardRef<HTMLButtonElement, LoadingButtonProps>(
-  ({ children, className, isLoading = false, ...props }, ref) => {
+  (
+    { children, className, disabled = false, isLoading = false, ...props },
+    ref
+  ) => {
     return (
       <div className="relative">
         {/* {isLoading && (
@@ -20,7 +23,7 @@ const LoadingButton = React.forwardRef<HTMLButtonElement, LoadingButtonProps>(
         <Button
           className={cn(className, "")}
           ref={ref}
-          disabled={isLoading}
+          disabled={disabled}
           {...props}
         >
           {isLoading && <LoadingSpinner className="w-6 h-6 mr-2" />}

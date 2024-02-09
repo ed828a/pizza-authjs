@@ -31,7 +31,7 @@ export const {
       },
       async authorize(credentials) {
         const validatedFields = CredentialSigninSchema.safeParse(credentials);
-        console.log("validatedFields", validatedFields);
+        // console.log("validatedFields", validatedFields);
 
         if (validatedFields.success) {
           const { email, password } = validatedFields.data;
@@ -98,7 +98,7 @@ export const {
   },
   callbacks: {
     async signIn({ user, account }) {
-      console.log("callback signIn", { user, account });
+      // console.log("callback signIn", { user, account });
 
       // todo: add a check if the provider is one of my settings in authConfig.
 
@@ -135,8 +135,9 @@ export const {
 
       return true;
     },
-    async jwt({ token, user }) {
-      console.log("callback jwt:", { token, user }); // token.sub is the user.id
+    async jwt({ token, user, trigger }) {
+      // console.log("callback jwt:", { token, user }); // token.sub is the user.id
+      console.log("callback jwt trigger", trigger);
 
       if (!token.sub) return token;
 
@@ -154,13 +155,20 @@ export const {
       token.email = existingUser.email;
       token.role = existingUser.role;
       token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
+      token.image = existingUser.image;
+
+      await prisma.user.update({
+        where: { id: token.sub },
+        data: { isOAuth: !!existingAccount },
+      });
 
       return token;
     },
 
     //@ts-expect-error
-    async session({ session, token }) {
-      console.log("callback session: ", { session, token });
+    async session({ session, token, trigger }) {
+      // console.log("callback session: ", { session, token });
+      console.log("callback session trigger: ", trigger);
 
       if (token.sub && session.user) {
         session.user.id = token.sub;
@@ -174,6 +182,7 @@ export const {
         session.user.name = token.name;
         session.user.email = token.email;
         session.user.isOAuth = token.isOAuth;
+        session.user.image = token.image;
       }
 
       return session;

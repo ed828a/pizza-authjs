@@ -20,9 +20,9 @@ const SettingsPage = async (props: Props) => {
     where: { email: session?.user?.email },
   });
 
-  if (!user) {
-    await signOut();
-  }
+  // if (!user) {
+  //   await signOut();
+  // }
 
   const clientUser: SettingsUser = {
     name: user?.name ?? "",
