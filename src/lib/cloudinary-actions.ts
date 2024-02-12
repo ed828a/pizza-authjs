@@ -23,7 +23,6 @@ export async function create(formData: FormData) {
           tags: ["actions-upload-sneakers"],
         },
         function (error, result) {
-          // console.log("result", result);
           if (error) {
             reject(error);
             return;

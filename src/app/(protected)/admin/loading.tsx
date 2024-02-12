@@ -6,7 +6,7 @@ type Props = {};
 
 const AdminRoutesLoading = (props: Props) => {
   return (
-    <div className="pagewrapper shadow-2xl">
+    <div className="w-full flex justify-center items-center shadow-2xl">
       <CardWrapper
         headerLabel="Fetching..."
         backButtonLabel="Back to home"

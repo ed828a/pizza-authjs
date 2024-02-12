@@ -15,17 +15,7 @@ const LoadingButton = React.forwardRef<HTMLButtonElement, LoadingButtonProps>(
   ) => {
     return (
       <div className="relative">
-        {/* {isLoading && (
-          <div className="w-full h-full absolute top-0 left-0 right-0 flex justify-center items-center text-primary ">
-            <LoadingSpinner className="w-6 h-6 " />
-          </div>
-        )} */}
-        <Button
-          className={cn(className, "")}
-          ref={ref}
-          disabled={disabled}
-          {...props}
-        >
+        <Button className={className} ref={ref} disabled={disabled} {...props}>
           {isLoading && <LoadingSpinner className="w-6 h-6 mr-2" />}
           {children}
         </Button>

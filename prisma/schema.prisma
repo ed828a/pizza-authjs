@@ -86,3 +86,28 @@ model TwoFactorToken {
 
   @@unique([email, token])
 }
+
+model Category {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String @unique
+
+  MenuItem MenuItem[]
+}
+
+type AddonType {
+  name  String
+  price String
+}
+
+model MenuItem {
+  id               String      @id @default(auto()) @map("_id") @db.ObjectId
+  name             String
+  image            String
+  description      String
+  categoryName     String
+  category         Category    @relation(fields: [categoryName], references: [name])
+  basePrice        String
+  sizes            AddonType[]
+  extraIngredients AddonType[]
+  bestSeller       Boolean
+}

@@ -99,3 +99,100 @@ export function html({
 export function text({ url, host }: { url: string; host: string }) {
   return `Sign in to ${host}\n${url}\n\n`;
 }
+
+function arraysEqual(arr1: AddonType[], arr2: AddonType[]) {
+  if (arr1.length !== arr2.length) {
+    return false;
+  }
+
+  for (let i = 0; i < arr1.length; i++) {
+    const obj1 = arr1[i];
+    const obj2 = arr2[i];
+
+    for (const key in obj1) {
+      // @ts-expect-error
+      if (obj1[key] !== obj2[key]) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+export const disableSubmitMenuItems = (
+  a: MenuItemType | null,
+  b: MenuItemType | null
+) => {
+  if (a === null) return true;
+  if (b === null) {
+    const enable =
+      a.name.length > 0 &&
+      a.image.length > 0 &&
+      a.description.length > 0 &&
+      a.category.length > 0 &&
+      a.basePrice.length > 0;
+
+    console.log("disableSubmitMenuItems return ", !enable);
+    return !enable;
+  }
+
+  let enable =
+    a.name !== b.name ||
+    a.image !== b.image ||
+    a.description !== b.description ||
+    a.category !== b.category ||
+    a.basePrice !== b.basePrice ||
+    a.sizes.length !== b.sizes.length ||
+    a.extraIngredients.length !== b.extraIngredients.length ||
+    a.bestSeller !== b.bestSeller;
+
+  console.log("disableSubmitMenuItems return ", !enable);
+  let disabled =
+    arraysEqual(a.sizes, b.sizes) &&
+    arraysEqual(a.extraIngredients, b.extraIngredients);
+
+  console.log(
+    "arraysEqual(a.sizes, b.sizes) return",
+    arraysEqual(a.sizes, b.sizes)
+  );
+  console.log(
+    " arraysEqual(a.extraIngredients, b.extraIngredients) return",
+    arraysEqual(a.extraIngredients, b.extraIngredients)
+  );
+
+  return disabled && !enable;
+};
+
+export const generatePagination = (currentPage: number, totalPages: number) => {
+  // If the total number of pages is 7 or less,
+  // display all pages without any ellipsis.
+  if (totalPages <= 7) {
+    return Array.from({ length: totalPages }, (_, i) => i + 1);
+  }
+
+  // If the current page is among the first 3 pages,
+  // show the first 3, an ellipsis, and the last 2 pages.
+  if (currentPage <= 3) {
+    return [1, 2, 3, "...", totalPages - 1, totalPages];
+  }
+
+  // If the current page is among the last 3 pages,
+  // show the first 2, an ellipsis, and the last 3 pages.
+  if (currentPage >= totalPages - 2) {
+    return [1, 2, "...", totalPages - 2, totalPages - 1, totalPages];
+  }
+
+  // If the current page is somewhere in the middle,
+  // show the first page, an ellipsis, the current page and its neighbors,
+  // another ellipsis, and the last page.
+  return [
+    1,
+    "...",
+    currentPage - 1,
+    currentPage,
+    currentPage + 1,
+    "...",
+    totalPages,
+  ];
+};

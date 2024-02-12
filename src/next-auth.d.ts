@@ -51,3 +51,8 @@ type TProfileState = {
   };
   message?: string | null;
 };
+
+type CategoryType = {
+  id: string?;
+  name: string?;
+};

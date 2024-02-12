@@ -137,7 +137,7 @@ export const {
     },
     async jwt({ token, user, trigger }) {
       // console.log("callback jwt:", { token, user }); // token.sub is the user.id
-      console.log("callback jwt trigger", trigger);
+      // console.log("callback jwt trigger", trigger);
 
       if (!token.sub) return token;
 
@@ -168,7 +168,7 @@ export const {
     //@ts-expect-error
     async session({ session, token, trigger }) {
       // console.log("callback session: ", { session, token });
-      console.log("callback session trigger: ", trigger);
+      // console.log("callback session trigger: ", trigger);
 
       if (token.sub && session.user) {
         session.user.id = token.sub;
@@ -177,6 +177,7 @@ export const {
       if (token.role && session.user) {
         session.user.role = token.role;
       }
+
       if (session.user) {
         session.user.isTwoFactorEnabled = token.isTwoFactorEnabled;
         session.user.name = token.name;

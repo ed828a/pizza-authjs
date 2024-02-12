@@ -8,12 +8,16 @@ type Props = {
 
 const AdminRoutesLayout = async ({ children }: Props) => {
   const session = await auth();
-  console.log("UsersPage session", session);
+  console.log("AdminRoutesLayout session", session);
 
   if (!session || session.user.role !== "ADMIN") {
     redirect(`/auth/login?error=unauthenticated`);
   }
-  return <section className="pagewrapper">{children}</section>;
+  return (
+    <section className="w-full grow flex justify-center items-center">
+      {children}
+    </section>
+  );
 };
 
 export default AdminRoutesLayout;

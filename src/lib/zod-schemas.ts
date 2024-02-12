@@ -62,3 +62,26 @@ export const NewPasswordSchema = z.object({
 export const ResetSchema = z.object({
   email: z.string().email({ message: "Email is required." }),
 });
+
+export const CategorySchema = z.object({
+  name: z
+    .string()
+    .min(3, { message: "name must be at least 3 characters long." }),
+});
+
+const AddonTypeSchema = z.object({
+  name: z.string(),
+  price: z.string(),
+});
+
+export const MenuItemTypeSchema = z.object({
+  id: z.string().nullable(),
+  name: z.string(),
+  image: z.string(),
+  description: z.string(),
+  category: z.string(),
+  basePrice: z.string(),
+  sizes: z.array(AddonTypeSchema),
+  extraIngredients: z.array(AddonTypeSchema),
+  bestSeller: z.boolean(),
+});

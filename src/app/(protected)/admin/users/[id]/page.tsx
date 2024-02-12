@@ -10,7 +10,7 @@ type Props = {
 const UserDetails = async ({ params }: Props) => {
   const { id } = params;
   const user = await prisma.user.findUnique({ where: { id } });
-  console.log("UserDetails user", user);
+  // console.log("UserDetails user", user);
   return (
     <div>
       <Card className="w-[800px] mt-16 pt-8 pb-16">

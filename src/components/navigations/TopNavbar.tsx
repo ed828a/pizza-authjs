@@ -27,10 +27,6 @@ const TopNavbar = (props: Props) => {
               alt="logo"
               className="animate-run duration-500"
             />
-
-            {/* <div className="rounded-full animate-run">
-            <GiFullPizza className="dark:text-primary-foreground w-8 h-8 animate-spin direction-reverse" />
-          </div> */}
           </Link>
         </div>
         <Link
@@ -44,16 +40,28 @@ const TopNavbar = (props: Props) => {
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 text-gray-400 font-semibold ml-12">
-          <Link href="/" className="hover:text-primary">
+          <Link
+            href="/"
+            className="hover:text-primary dark:hover:text-primary-foreground"
+          >
             Home
           </Link>
-          <Link className="hover:text-primary" href="/menu">
+          <Link
+            className="hover:text-primary dark:hover:text-primary-foreground"
+            href="/menu"
+          >
             Menu
           </Link>
-          <Link className="hover:text-primary" href="/#about">
+          <Link
+            className="hover:text-primary dark:hover:text-primary-foreground"
+            href="/#about"
+          >
             About
           </Link>
-          <Link className="hover:text-primary" href="/#contact">
+          <Link
+            className="hover:text-primary dark:hover:text-primary-foreground"
+            href="/#contact"
+          >
             Contact
           </Link>
         </nav>
