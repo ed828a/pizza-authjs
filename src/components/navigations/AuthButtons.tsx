@@ -13,7 +13,7 @@ const AuthButtons = (props: Props) => {
   const { data: session, status } = useSession();
 
   return (
-    <div className="hidden sm:flex gap-2">
+    <div className="flex gap-2">
       {session ? (
         <UserButton />
       ) : (
