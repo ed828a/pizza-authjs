@@ -27,7 +27,7 @@ const ProfilePage = async (props: Props) => {
 
   return (
     <div className="flex justify-center">
-      <Card className="w-[800px] mt-16 pt-8 pb-16">
+      <Card className="mt-16 pt-8 pb-16">
         <CardHeader>
           <div className="flex justify-center items-center gap-4">
             <CgProfile className="w-8 h-8 " />

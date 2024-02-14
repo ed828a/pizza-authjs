@@ -13,7 +13,7 @@ const UserDetails = async ({ params }: Props) => {
   // console.log("UserDetails user", user);
   return (
     <div>
-      <Card className="w-[800px] mt-16 pt-8 pb-16">
+      <Card className=" mt-16 pt-8 pb-16">
         <CardHeader>
           <div className="flex justify-center items-center gap-4">
             <FaUserAlt className="w-8 h-8 " />

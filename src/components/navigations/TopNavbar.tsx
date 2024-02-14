@@ -108,30 +108,6 @@ const TopNavbar = (props: Props) => {
               {route.label}
             </Link>
           ))}
-          {/* <Link
-            href="/"
-            className="hover:text-primary dark:hover:text-primary-foreground"
-          >
-            Home
-          </Link>
-          <Link
-            className="hover:text-primary dark:hover:text-primary-foreground"
-            href="/menu"
-          >
-            Menu
-          </Link>
-          <Link
-            className="hover:text-primary dark:hover:text-primary-foreground"
-            href="/#about"
-          >
-            About
-          </Link>
-          <Link
-            className="hover:text-primary dark:hover:text-primary-foreground"
-            href="/#contact"
-          >
-            Contact
-          </Link> */}
         </nav>
       </div>
 
