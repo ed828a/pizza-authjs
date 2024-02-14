@@ -27,7 +27,7 @@ const MenuItemList = ({ menuItems, page }: Props) => {
           ? menuItems.map((item: any) => (
               <Link
                 key={item.id}
-                href={`/menu-items/edit/${item.id}${query}`}
+                href={`/admin/menu-items/edit/${item.id}${query}`}
                 className="bg-gray-200 p-4 rounded-lg hover:bg-white hover:shadow-lg hover:shadow-gray-500 transition-all"
               >
                 <div className="relative">

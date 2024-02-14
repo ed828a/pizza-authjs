@@ -15,6 +15,7 @@ import { FiUpload } from "react-icons/fi";
 import { toast } from "react-toastify";
 import MenuItemAddons from "./MenuItemAddons";
 import { createMenuItem } from "@/lib/actions/menuItemActions";
+import { MenuItemType } from "@/product";
 
 type Props = {
   categories: { id: string; name: string }[];
@@ -95,31 +96,29 @@ const MenuItemDetails = ({ categories, originalMenuItem }: Props) => {
   };
 
   return (
-    <div className="flex justify-between items-start gap-4 border p-4 pt-8 mt-10 rounded-lg w-full">
-      <div className="p-4">
-        <div className="flex flex-col justify-between ">
-          <div className="flex flex-col items-center gap-2 ">
-            <Image
-              src={
-                menuItem?.image ? menuItem.image : "/images/default_picture.png"
-              }
-              width={180}
-              height={180}
-              alt="avatar"
-              className="rounded-lg mb-2 bg-gray-300"
-            />
-            <CldUploadButton
-              uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
-              className={cn(
-                buttonVariants({ variant: "default" }),
-                "flex items-center w-full "
-              )}
-              onUpload={handleImageUpload}
-            >
-              <FiUpload className="w-6 h-6 mr-2" />
-              Upload
-            </CldUploadButton>
-          </div>
+    <div className="flex flex-col sm:flex-row justify-between items-start gap-4 border p-4 pt-8 mt-10 rounded-lg w-full">
+      <div className="mx-auto p-4">
+        <div className="flex flex-col items-center gap-2">
+          <Image
+            src={
+              menuItem?.image ? menuItem.image : "/images/default_picture.png"
+            }
+            width={180}
+            height={180}
+            alt="avatar"
+            className="rounded-lg mb-2 bg-gray-300"
+          />
+          <CldUploadButton
+            uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
+            className={cn(
+              buttonVariants({ variant: "default" }),
+              "flex items-center w-full "
+            )}
+            onUpload={handleImageUpload}
+          >
+            <FiUpload className="w-6 h-6 mr-2" />
+            Upload
+          </CldUploadButton>
         </div>
       </div>
 
