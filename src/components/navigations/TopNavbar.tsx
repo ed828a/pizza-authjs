@@ -1,15 +1,33 @@
+"use client";
 import Link from "next/link";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { GiFullPizza } from "react-icons/gi";
 import { ModeToggleButton } from "./ModeToggleButton";
 import AuthButtons from "./AuthButtons";
 import Image from "next/image";
 import { dancingScript } from "@/lib/utils";
 import { BsCart3 } from "react-icons/bs";
+import { CartContext } from "../providers/CartContextProvider";
+import { CartContextType } from "@/product";
 
 type Props = {};
 
 const TopNavbar = (props: Props) => {
+  const [isMounted, setIsMounted] = useState(false);
+  const { cartItems } = useContext(CartContext) as CartContextType;
+
+  console.log("Topbar cartItems", cartItems);
+
+  useEffect(() => {
+    setIsMounted(true);
+
+    return () => {
+      setIsMounted(false);
+    };
+  }, []);
+
+  if (!isMounted) return null;
+
   const ownerName = "edward";
 
   return (
@@ -23,9 +41,9 @@ const TopNavbar = (props: Props) => {
             <Image
               src={"/images/pizza_shop_logo.png"}
               width={48}
-              height={48}
+              height={45}
               alt="logo"
-              className="animate-run duration-500"
+              className="h-auto animate-run duration-500"
             />
           </Link>
         </div>
@@ -70,14 +88,11 @@ const TopNavbar = (props: Props) => {
       <div className="flex justify-center items-center gap-2">
         <Link href={"/cart"} className="relative group mr-2">
           <BsCart3 className="w-8 h-8 group-hover:text-primary" />
-          {/* {cartProducts.length > 0 && (
-            <span className="absolute -top-1 -right-3 text-xs bg-primary rounded-full text-white leading-3 px-2 py-1 ">
-              {cartProducts.length}
+          {cartItems.length > 0 && (
+            <span className="absolute -top-1 -right-3 text-xs bg-primary rounded-full text-white  dark:text-primary-foreground leading-3 px-2 py-1 ">
+              {cartItems.length}
             </span>
-          )} */}
-          <span className="absolute -top-1 -right-3 text-xs bg-primary dark:bg-primary rounded-full text-white dark:text-primary-foreground leading-3 px-2 py-1 ">
-            7
-          </span>
+          )}
         </Link>
         <AuthButtons />
         <ModeToggleButton />

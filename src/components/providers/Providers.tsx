@@ -2,6 +2,7 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { ThemeContextProvider } from "./ThemeContextProvider";
 import { NextAuthSessionProvider } from "./AuthContextProvider";
+import CartContextProvider from "./CartContextProvider";
 
 type Props = {
   children: ReactNode;
@@ -24,7 +25,9 @@ const Providers = ({ children }: Props) => {
       enableSystem
       disableTransitionOnChange
     >
-      <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
+      <NextAuthSessionProvider>
+        <CartContextProvider>{children}</CartContextProvider>
+      </NextAuthSessionProvider>
     </ThemeContextProvider>
   );
 };

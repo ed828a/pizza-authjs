@@ -6,6 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 import { Inter, Merriweather, Dancing_Script } from "next/font/google";
+import { AddonType, MenuItemType } from "@/product";
 
 export const dancingScript = Dancing_Script({
   weight: ["400", "500", "600", "700"],
@@ -195,4 +196,11 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
     "...",
     totalPages,
   ];
+};
+
+export const formatTime = (dateString: string) => {
+  const date = new Date(dateString).toLocaleDateString();
+  const time = new Date(dateString).toLocaleTimeString();
+
+  return { date, time };
 };

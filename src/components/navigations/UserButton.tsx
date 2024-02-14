@@ -42,6 +42,13 @@ const UserButton = (props: Props) => {
           <span>Settings</span>
         </DropdownMenuItem>
 
+        {session?.user && (
+          <DropdownMenuItem onClick={() => router.push("/orders")}>
+            <Settings className="mr-2 h-4 w-4" />
+            <span>Orders</span>
+          </DropdownMenuItem>
+        )}
+
         {session?.user.role === "ADMIN" && (
           <>
             <DropdownMenuItem onClick={() => router.push("/admin/users")}>

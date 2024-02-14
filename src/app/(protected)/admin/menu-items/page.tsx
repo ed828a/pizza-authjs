@@ -2,7 +2,7 @@ import React from "react";
 import CreateMenuItemLink from "./CreateMenuItemLink";
 import prisma from "@/lib/database";
 import MenuItemList from "./MenuItemList";
-import Pagination from "./Pagination";
+import Pagination from "@/components/share/Pagination";
 
 type Props = {
   searchParams?: { query?: string; page?: string };

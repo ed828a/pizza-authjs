@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Providers from "@/components/providers/Providers";
 import TopNavbar from "@/components/navigations/TopNavbar";
-import { inter } from "@/lib/utils";
+import { cn, inter } from "@/lib/utils";
 import ToastContainerWrapper from "@/components/share/ToastContainerWrapper";
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="container scrollbar-hide">
       <body className={inter.className}>
         <Providers>
           <main className="h-full flex flex-col min-w-80">
