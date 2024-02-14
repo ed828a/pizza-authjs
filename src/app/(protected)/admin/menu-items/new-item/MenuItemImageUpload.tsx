@@ -11,6 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { FiUpload } from "react-icons/fi";
+import { MenuItemType } from "@/product";
 
 type Props = {
   menuItem: MenuItemType | null;

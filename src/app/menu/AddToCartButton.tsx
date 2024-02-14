@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { AddonType, MenuItemType } from "@/product";
 import React from "react";
 
 type Props = {

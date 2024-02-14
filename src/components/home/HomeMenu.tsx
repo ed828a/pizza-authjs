@@ -1,6 +1,7 @@
 import Image from "next/image";
 import SectionHeader from "../share/SectionHeader";
 import MenuItemOnFront from "@/app/menu/MenuItemOnFront";
+import { MenuItemType } from "@/product";
 
 type Props = {};
 

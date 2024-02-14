@@ -1,5 +1,6 @@
 "use client";
 
+import { AddonType, CartContextType, CartItemType } from "@/product";
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 

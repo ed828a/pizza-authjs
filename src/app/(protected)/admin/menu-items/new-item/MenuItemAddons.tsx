@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 
 import AddonItem from "./AddonItem";
 import { Button } from "@/components/ui/button";
+import { AddonType, MenuItemType } from "@/product";
 
 type Props = {
   addonName: string;

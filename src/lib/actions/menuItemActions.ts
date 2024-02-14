@@ -2,6 +2,7 @@
 
 import prisma from "@/lib/database";
 import { MenuItemTypeSchema } from "../zod-schemas";
+import { MenuItemType } from "@/product";
 
 export const createMenuItem = async (menuItem: MenuItemType) => {
   console.log("createMenuItem menuItem", menuItem);

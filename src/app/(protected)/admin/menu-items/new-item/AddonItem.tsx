@@ -1,3 +1,4 @@
+import { AddonType } from "@/product";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 type Props = {
