@@ -1,7 +1,7 @@
 import prisma from "@/lib/database";
 import MenuItemDetails from "../../new-item/MenuItemDetails";
 import ShowAllMenuItemsLink from "../../ShowAllMenuItemsLink";
-import { MenuItemType } from "@/product";
+import { TMenuItem } from "@/product";
 
 type Props = {
   params: { id: string };
@@ -16,7 +16,7 @@ const EditMenuItemPage = async ({ params }: Props) => {
   console.log("MenuItemDetailsPage cateogries", categories);
   console.log("MenuItemDetailsPage menu", menuItem);
 
-  const originalMenuItem: MenuItemType = {
+  const originalMenuItem: TMenuItem = {
     id: menuItem?.id,
     name: menuItem?.name!,
     image: menuItem?.image!,
