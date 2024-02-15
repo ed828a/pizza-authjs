@@ -171,7 +171,7 @@ const ProfileForm = ({ user, callbackUrl }: Props) => {
   return (
     <div className="w-full max-w-screen-md flex flex-col transition-all duration-500  ">
       <Link href={callbackUrl} className="self-end mr-8  h-4">
-        <GoArrowLeft className="hover:text-red-500 hover:border-red-500 w-10 h-6 ml-auto border rounded-full " />
+        <GoArrowLeft className="hover:text-red-500 hover:border-red-500 w-10 h-6 ml-auto border rounded-full hidden sm:block " />
       </Link>
 
       <div className="flex flex-col sm:flex-row gap-4 items-stretch justify-center ">
@@ -185,7 +185,7 @@ const ProfileForm = ({ user, callbackUrl }: Props) => {
             alt="avatar"
             className="rounded-lg mb-2 "
           />
-          <label className="w-full max-w-[360px] ">
+          <label className="w-full max-w-[300px] px-4 ">
             <input
               id="image"
               name="image"

@@ -9,6 +9,9 @@ import { dancingScript } from "@/lib/utils";
 import { BsCart3 } from "react-icons/bs";
 import { CartContext } from "../providers/CartContextProvider";
 import { CartContextType } from "@/product";
+import ToggleButton from "./ToggleButton";
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
+import { MdOutlineMenu } from "react-icons/md";
 
 type Props = {};
 
@@ -17,6 +20,25 @@ const TopNavbar = (props: Props) => {
   const { cartItems } = useContext(CartContext) as CartContextType;
 
   console.log("Topbar cartItems", cartItems);
+
+  const routes = [
+    {
+      href: "/",
+      label: "Home",
+    },
+    {
+      href: "/menu",
+      label: "Menu",
+    },
+    {
+      href: "/#about",
+      label: "About",
+    },
+    {
+      href: "/#contact",
+      label: "Contact",
+    },
+  ];
 
   useEffect(() => {
     setIsMounted(true);
@@ -33,6 +55,24 @@ const TopNavbar = (props: Props) => {
   return (
     <header className="flex justify-between items-center p-2">
       <div className="flex items-center">
+        <Sheet>
+          <SheetTrigger>
+            <MdOutlineMenu className="h-6 md:hidden w-6" />
+          </SheetTrigger>
+          <SheetContent side="left" className="w-[300px] sm:w-[400px]">
+            <nav className="flex flex-col gap-4">
+              {routes.map((route, i) => (
+                <Link
+                  key={i}
+                  href={route.href}
+                  className="hover:text-primary dark:hover:text-primary-foreground"
+                >
+                  {route.label}
+                </Link>
+              ))}
+            </nav>
+          </SheetContent>
+        </Sheet>
         <div className="w-24">
           <Link
             href="/"
@@ -47,6 +87,7 @@ const TopNavbar = (props: Props) => {
             />
           </Link>
         </div>
+
         <Link
           href={"/profile"}
           className={`${dancingScript.className} whitespace-nowrap font-semibold hidden lg:flex gap-4 items-center text-3xl `}
@@ -58,30 +99,15 @@ const TopNavbar = (props: Props) => {
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 text-gray-400 font-semibold ml-12">
-          <Link
-            href="/"
-            className="hover:text-primary dark:hover:text-primary-foreground"
-          >
-            Home
-          </Link>
-          <Link
-            className="hover:text-primary dark:hover:text-primary-foreground"
-            href="/menu"
-          >
-            Menu
-          </Link>
-          <Link
-            className="hover:text-primary dark:hover:text-primary-foreground"
-            href="/#about"
-          >
-            About
-          </Link>
-          <Link
-            className="hover:text-primary dark:hover:text-primary-foreground"
-            href="/#contact"
-          >
-            Contact
-          </Link>
+          {routes.map((route, i) => (
+            <Link
+              key={route.label}
+              href={route.href}
+              className="hover:text-primary dark:hover:text-primary-foreground"
+            >
+              {route.label}
+            </Link>
+          ))}
         </nav>
       </div>
 
@@ -95,7 +121,7 @@ const TopNavbar = (props: Props) => {
           )}
         </Link>
         <AuthButtons />
-        <ModeToggleButton />
+        <ToggleButton />
       </div>
     </header>
   );
