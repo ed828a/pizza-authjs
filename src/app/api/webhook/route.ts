@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
-
 import { revalidatePath } from "next/cache";
 import type { Stripe } from "stripe";
+import prisma from "@/lib/database";
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
@@ -53,7 +53,7 @@ export async function POST(req: Request) {
     const isPaid = event?.data?.object?.payment_status === "paid";
     if (isPaid) {
       try {
-        const updatedOrder = await prisma?.order.update({
+        const updatedOrder = await prisma.order.update({
           where: { id: orderId },
           data: {
             status: "PAID",
