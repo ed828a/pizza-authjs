@@ -2,8 +2,9 @@
 
 import prisma from "@/lib/database";
 import { MenuItemTypeSchema } from "../zod-schemas";
+import { TMenuItem } from "@/product";
 
-export const createMenuItem = async (menuItem: MenuItemType) => {
+export const createMenuItem = async (menuItem: TMenuItem) => {
   console.log("createMenuItem menuItem", menuItem);
   const validatedFields = MenuItemTypeSchema.safeParse(menuItem);
 

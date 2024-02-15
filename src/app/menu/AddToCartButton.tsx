@@ -1,14 +1,15 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { TAddon, TMenuItem } from "@/product";
 import React from "react";
 
 type Props = {
   hasSizesOrExtra: boolean;
   basePrice: number;
-  item: Partial<MenuItemType>;
-  handleAddToCartButtonClick: (item: Partial<MenuItemType>) => void;
-  sizes: AddonType[];
+  item: Partial<TMenuItem>;
+  handleAddToCartButtonClick: (item: Partial<TMenuItem>) => void;
+  sizes: TAddon[];
 };
 
 const AddToCartButton = ({

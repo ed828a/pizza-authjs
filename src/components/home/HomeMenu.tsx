@@ -1,6 +1,7 @@
 import Image from "next/image";
 import SectionHeader from "../share/SectionHeader";
 import MenuItemOnFront from "@/app/menu/MenuItemOnFront";
+import { TMenuItem } from "@/product";
 
 type Props = {};
 
@@ -38,7 +39,7 @@ const HomeMenu = async (props: Props) => {
       <SectionHeader subHeader="check out" mainHeader="Our Best Sellers" />
       <div className="grid md:grid-cols-3 xl:grid-cols-4 gap-4 mt-16">
         {bestSellers.length > 0 &&
-          bestSellers.map((item: Partial<MenuItemType>) => (
+          bestSellers.map((item: Partial<TMenuItem>) => (
             <MenuItemOnFront key={item.id} item={item} />
           ))}
       </div>

@@ -3,7 +3,7 @@ import prisma from "@/lib/database";
 import { RocketIcon } from "@radix-ui/react-icons";
 import ClearCart from "./ClearCart";
 import OrderDetailsContent from "./OrderDetailsContent";
-import { CartItemType, OrderType } from "@/product";
+import { TCartItem, OrderType } from "@/product";
 
 type Props = {
   params: {
@@ -53,7 +53,7 @@ const OrderDetailsPage = async ({ params, searchParams }: Props) => {
           city: order.city!,
           postcode: order.postcode!,
           country: order.country!,
-          purchasedItems: order.purchasedItems as CartItemType[],
+          purchasedItems: order.purchasedItems as TCartItem[],
           status: order.status,
         }}
       />

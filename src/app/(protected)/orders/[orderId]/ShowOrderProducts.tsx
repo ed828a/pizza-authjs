@@ -1,11 +1,11 @@
 import { cn } from "@/lib/utils";
-import { CartItemType } from "@/product";
+import { TCartItem } from "@/product";
 import { OrderStatus } from "@prisma/client";
 import Image from "next/image";
 import React from "react";
 
 type Props = {
-  cartProducts: CartItemType[];
+  cartProducts: TCartItem[];
   orderStatus: OrderStatus;
 };
 

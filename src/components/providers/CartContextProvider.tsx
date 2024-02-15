@@ -1,5 +1,6 @@
 "use client";
 
+import { CartContextType, TAddon, TCartItem } from "@/product";
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -41,10 +42,10 @@ const CartContextProvider = ({ children }: Props) => {
   };
 
   function addToCart(
-    item: Partial<CartItemType>,
+    item: Partial<TCartItem>,
     subPrice: string,
-    size: AddonType | null = null,
-    extras: AddonType[] = []
+    size: TAddon | null = null,
+    extras: TAddon[] = []
   ) {
     setCartItems((prev) => {
       const cartItem = { ...item, size, extras, subPrice };

@@ -11,12 +11,13 @@ import { cn } from "@/lib/utils";
 
 import AddonItem from "./AddonItem";
 import { Button } from "@/components/ui/button";
+import { TAddon, TMenuItem } from "@/product";
 
 type Props = {
   addonName: string;
   addonLabel: string;
   setMenuItem: React.Dispatch<any>;
-  menuItem: MenuItemType | null;
+  menuItem: TMenuItem | null;
   reset: boolean;
   setReset: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -31,7 +32,7 @@ const MenuItemAddons = ({
 }: Props) => {
   // console.log("MenuItemAddons menuItem", menuItem);
   // console.log("addonName", addonName);
-  let init: AddonType[] = [];
+  let init: TAddon[] = [];
   if (addonName === "sizes" && menuItem && menuItem.sizes.length > 0) {
     init = menuItem.sizes;
   } else if (
@@ -42,7 +43,7 @@ const MenuItemAddons = ({
     init = menuItem.extraIngredients;
   }
 
-  const [addons, setAddons] = useState<AddonType[]>(init);
+  const [addons, setAddons] = useState<TAddon[]>(init);
   const [isOpen, setIsOpen] = useState(true);
 
   // console.log("MenuItemAddons init", init);
@@ -59,15 +60,15 @@ const MenuItemAddons = ({
     }
   }, [reset]);
 
-  const addAddon = ({ name, price }: AddonType) => {
-    setAddons((prev: AddonType[]) => [...prev, { name, price }]);
+  const addAddon = ({ name, price }: TAddon) => {
+    setAddons((prev: TAddon[]) => [...prev, { name, price }]);
   };
 
   function editAddon(
     ev: React.ChangeEvent<HTMLInputElement>,
     index: number
   ): void {
-    setAddons((prev: AddonType[]) => {
+    setAddons((prev: TAddon[]) => {
       const newSizes = [...prev];
       const a = newSizes[index];
       newSizes[index] = { ...a, [ev.target.name]: ev.target.value };
@@ -109,7 +110,7 @@ const MenuItemAddons = ({
       <div className={cn("transition-all", { hidden: !isOpen })}>
         {addons &&
           addons?.length > 0 &&
-          addons.map((size: AddonType, index) => (
+          addons.map((size: TAddon, index) => (
             <AddonItem
               addon={size}
               addonLabel={addonLabel}

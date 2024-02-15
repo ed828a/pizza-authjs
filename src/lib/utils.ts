@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 import { Inter, Merriweather, Dancing_Script } from "next/font/google";
-import { AddonType, MenuItemType } from "@/product";
+import { TAddon, TMenuItem } from "@/product";
 
 export const dancingScript = Dancing_Script({
   weight: ["400", "500", "600", "700"],
@@ -101,7 +101,7 @@ export function text({ url, host }: { url: string; host: string }) {
   return `Sign in to ${host}\n${url}\n\n`;
 }
 
-function arraysEqual(arr1: AddonType[], arr2: AddonType[]) {
+function arraysEqual(arr1: TAddon[], arr2: TAddon[]) {
   if (arr1.length !== arr2.length) {
     return false;
   }
@@ -122,8 +122,8 @@ function arraysEqual(arr1: AddonType[], arr2: AddonType[]) {
 }
 
 export const disableSubmitMenuItems = (
-  a: MenuItemType | null,
-  b: MenuItemType | null
+  a: TMenuItem | null,
+  b: TMenuItem | null
 ) => {
   if (a === null) return true;
   if (b === null) {

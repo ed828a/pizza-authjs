@@ -15,10 +15,11 @@ import { FiUpload } from "react-icons/fi";
 import { toast } from "react-toastify";
 import MenuItemAddons from "./MenuItemAddons";
 import { createMenuItem } from "@/lib/actions/menuItemActions";
+import { TMenuItem } from "@/product";
 
 type Props = {
   categories: { id: string; name: string }[];
-  originalMenuItem?: MenuItemType;
+  originalMenuItem?: TMenuItem;
 };
 
 const init = {
@@ -35,7 +36,7 @@ const init = {
 const MenuItemDetails = ({ categories, originalMenuItem }: Props) => {
   const initState = originalMenuItem ?? init;
 
-  const [menuItem, setMenuItem] = useState<MenuItemType | null>(initState);
+  const [menuItem, setMenuItem] = useState<TMenuItem | null>(initState);
   const [reset, setReset] = useState(false);
 
   const handleChange = (

@@ -1,8 +1,9 @@
+import { TAddon } from "@/product";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 type Props = {
   addonLabel: string;
-  addon: AddonType;
+  addon: TAddon;
   editAddon: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
   removeAddon: (index: number) => void;
   className: string;

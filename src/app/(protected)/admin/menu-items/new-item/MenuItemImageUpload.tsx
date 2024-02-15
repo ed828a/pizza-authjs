@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import React from "react";
 import { toast } from "react-toastify";
 import {
@@ -11,10 +10,11 @@ import {
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { FiUpload } from "react-icons/fi";
+import { TMenuItem } from "@/product";
 
 type Props = {
-  menuItem: MenuItemType | null;
-  setMenuItem: React.Dispatch<React.SetStateAction<MenuItemType | null>>;
+  menuItem: TMenuItem | null;
+  setMenuItem: React.Dispatch<React.SetStateAction<TMenuItem | null>>;
 };
 
 const MenuItemImageUpload = ({ menuItem, setMenuItem }: Props) => {

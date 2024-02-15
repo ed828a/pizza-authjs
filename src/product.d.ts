@@ -1,6 +1,6 @@
 import { OrderStatus } from "@prisma/client";
 
-type MenuItemType = {
+type TMenuItem = {
   id?: string | null;
   name: string;
   image: string;
@@ -12,7 +12,7 @@ type MenuItemType = {
   bestSeller: boolean;
 };
 
-type AddonType = {
+type TAddon = {
   name: string;
   price: string;
 };
@@ -30,7 +30,7 @@ type CartContextType = {
   clearCart: () => void;
 };
 
-type CartItemType = {
+type TCartItem = {
   id: string;
   name: string;
   image: string;

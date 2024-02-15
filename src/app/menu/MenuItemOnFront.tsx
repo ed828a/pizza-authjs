@@ -12,15 +12,10 @@ import React, {
 import { toast } from "react-toastify";
 import AddToCartButton from "./AddToCartButton";
 import { Button } from "@/components/ui/button";
-import {
-  AddonType,
-  CartContextType,
-  CartItemType,
-  MenuItemType,
-} from "@/product";
+import { TAddon, CartContextType, TCartItem, TMenuItem } from "@/product";
 
 type Props = {
-  item: Partial<MenuItemType>;
+  item: Partial<TMenuItem>;
 };
 
 const MenuItemOnFront = ({ item }: Props) => {
@@ -30,10 +25,10 @@ const MenuItemOnFront = ({ item }: Props) => {
   const [showPopup, setShowPopup] = useState(false);
   const popRef = useRef(null);
 
-  const [selectedSize, setselectedSize] = useState<AddonType | null>(
+  const [selectedSize, setselectedSize] = useState<TAddon | null>(
     sizes?.[0] || null
   );
-  const [selectExtras, setSelectExtras] = useState<AddonType[]>([]);
+  const [selectExtras, setSelectExtras] = useState<TAddon[]>([]);
 
   const handleOutsideClick = (e: any) => {
     if (popRef.current && !(popRef.current as any).contains(e.target)) {
@@ -50,7 +45,7 @@ const MenuItemOnFront = ({ item }: Props) => {
 
   const handleExtraThingClick = (
     ev: ChangeEvent<HTMLInputElement>,
-    extra: AddonType
+    extra: TAddon
   ) => {
     const checked = ev.target.checked;
 
@@ -76,8 +71,8 @@ const MenuItemOnFront = ({ item }: Props) => {
     }
   }
 
-  const handleAddToCartButtonClick = async (item: Partial<MenuItemType>) => {
-    const cartItem: Partial<CartItemType> = {
+  const handleAddToCartButtonClick = async (item: Partial<TMenuItem>) => {
+    const cartItem: Partial<TCartItem> = {
       id: item.id as string,
       name: item.name,
       image: item.image,
@@ -137,9 +132,7 @@ const MenuItemOnFront = ({ item }: Props) => {
                           name="size"
                           id={size.name}
                           className="accent-primary dark:accent-primary-foreground"
-                          checked={
-                            (selectedSize as AddonType)?.name === size.name
-                          }
+                          checked={(selectedSize as TAddon)?.name === size.name}
                           onChange={(e) => setselectedSize(size)}
                         />
                         <span className="flex gap-2 ">
