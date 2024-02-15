@@ -71,7 +71,12 @@ const CartContent = ({ profile }: Props) => {
       body: JSON.stringify({
         purchaserEmail: userEmail,
         address: addressInfo,
-        cartItems,
+        cartItems: cartItems.map((item) => {
+          const isDeletedItem = delete item.category;
+          console.log("isDeletedItem", isDeletedItem);
+          console.log("item", item);
+          return item;
+        }),
       }),
       headers: {
         "Content-Type": "application/json",
@@ -84,6 +89,7 @@ const CartContent = ({ profile }: Props) => {
       })
       .then((link) => {
         // redirect to stripe payment default page, here you can't use useRouter, because it links to a third-party.
+        console.log("link", link);
         window.location = link;
       });
 

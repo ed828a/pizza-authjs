@@ -20,6 +20,7 @@ type Props = {};
 const UserButton = (props: Props) => {
   const { data: session } = useSession();
   const router = useRouter();
+  console.log("UserButton session", session);
 
   return (
     <DropdownMenu>
