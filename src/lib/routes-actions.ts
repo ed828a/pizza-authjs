@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { TProfileState } from "@/next-auth";
 import { UserRole } from "@prisma/client";
+import prisma from "@/lib/database";
 
 const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])$/
@@ -72,7 +73,7 @@ export async function updateProfileAction(
   console.log("validatedFields.data", validatedFields.data);
   console.log("email", email);
   try {
-    const user = await prisma?.user.update({
+    const user = await prisma.user.update({
       where: { email },
       data: { ...validatedFields.data },
     });

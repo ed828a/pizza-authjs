@@ -2,11 +2,12 @@ import Image from "next/image";
 import SectionHeader from "../share/SectionHeader";
 import MenuItemOnFront from "@/app/menu/MenuItemOnFront";
 import { TMenuItem } from "@/product";
+import prisma from "@/lib/database";
 
 type Props = {};
 
 const HomeMenu = async (props: Props) => {
-  const bestSellers = await prisma?.menuItem.findMany({
+  const bestSellers = await prisma.menuItem.findMany({
     where: { bestSeller: true },
   });
 

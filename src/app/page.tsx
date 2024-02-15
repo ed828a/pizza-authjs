@@ -1,10 +1,7 @@
 import Hero from "@/components/home/Hero";
 import HomeMenu from "@/components/home/HomeMenu";
-import LogoutButton from "@/components/share/LogoutButton";
 import SectionHeader from "@/components/share/SectionHeader";
-import { Button } from "@/components/ui/button";
-import { auth, signOut } from "@/lib/auth";
-import Image from "next/image";
+import { auth } from "@/lib/auth";
 
 export default async function Home() {
   const session = await auth();
