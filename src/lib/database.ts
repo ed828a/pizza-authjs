@@ -7,6 +7,8 @@ declare global {
 const prisma = global.prisma || new PrismaClient({ log: ["info"] });
 if (process.env.NODE_ENV !== "production") global.prisma = prisma;
 
+export default prisma;
+
 /**
  * the following are not working in vercel
  */
@@ -20,5 +22,3 @@ if (process.env.NODE_ENV !== "production") global.prisma = prisma;
 //   }
 //   prisma = global.prisma;
 // }
-
-export default prisma;
