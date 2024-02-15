@@ -40,10 +40,10 @@ const AddonItem = ({
         />
       </div>
 
-      <div className="relative">
+      <div className="relative px-4 ">
         <label
           htmlFor="sizeprice"
-          className="text-gray-400 text-sm absolute top-0 left-2"
+          className="text-gray-400 text-sm absolute top-0 left-6"
         >
           Extra price
         </label>

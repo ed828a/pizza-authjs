@@ -122,8 +122,8 @@ const MenuItemDetails = ({ categories, originalMenuItem }: Props) => {
         </div>
       </div>
 
-      <div className="grow flex justify-center items-center">
-        <form onSubmit={handleSubmit}>
+      <div className="grow flex justify-center items-center px-4 sm:px-0">
+        <form onSubmit={handleSubmit} className="">
           <div className="flex flex-col gap-4 pl-2">
             <LabelInput
               label="Name"
@@ -173,7 +173,7 @@ const MenuItemDetails = ({ categories, originalMenuItem }: Props) => {
               }
               handleChange={handleChange}
             />
-            <div className="w-[400px]">
+            <div className="sm:w-[400px]">
               <MenuItemAddons
                 addonName="sizes"
                 addonLabel="Add item size"
@@ -215,11 +215,6 @@ const MenuItemDetails = ({ categories, originalMenuItem }: Props) => {
               >
                 {menuItem?.id ? "update" : "create"}
               </LoadingButton>
-
-              {/* <DeleteButton
-          label="Delete this menu item"
-          onDelete={handleDelete}
-        /> */}
             </div>
           </div>
         </form>

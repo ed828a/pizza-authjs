@@ -54,10 +54,10 @@ const OrderListPage = async (props: Props) => {
         {orders.length > 0 &&
           orders.map((order: any) => (
             <div
-              className="bg-gray-100 dark:bg-inherit mb-2 p-4 rounded-lg grid grid-cols-4 xs:grid-cols-5"
-              key={order._id}
+              className="bg-gray-100 dark:bg-inherit mb-2 p-4 rounded-lg grid grid-cols-4 sm:grid-cols-5"
+              key={order.id}
             >
-              <div className="col-span-2">
+              <div className="col-span-2 flex flex-col sm:flex-row">
                 <div className="">
                   {order.purchaserEmail !== session.user.email &&
                     order.purchaserEmail}
@@ -66,40 +66,42 @@ const OrderListPage = async (props: Props) => {
                   {order.purchasedItems.map((p: any) => p.name).join(", ")}
                 </div>
               </div>
-              <div className="flex items-center justify-end ">
-                <span
-                  className={cn(
-                    "px-4 py-1 rounded-md text-white capitalize w-[100px] text-center",
-                    {
-                      "bg-green-500 border-green-500":
-                        order.status === OrderStatus.PAID,
-                      "bg-red-500 border-primary":
-                        order.status === OrderStatus.PENDING,
-                    }
-                  )}
-                >
-                  {order.status === OrderStatus.PAID ? "paid" : "pending"}
-                </span>
-              </div>
-              <div className="hidden xs:block">
-                <div className="flex flex-col items-end justify-center">
-                  {formatTime(order.createdAt).date}
+              <div className="col-span-2 sm:col-span-3 flex flex-col sm:flex-row gap-2 justify-center items-center">
+                <div className="flex items-center justify-end ">
+                  <span
+                    className={cn(
+                      "px-4 py-1 rounded-md text-white capitalize w-[100px] text-center",
+                      {
+                        "bg-green-500 border-green-500":
+                          order.status === OrderStatus.PAID,
+                        "bg-red-500 border-primary":
+                          order.status === OrderStatus.PENDING,
+                      }
+                    )}
+                  >
+                    {order.status === OrderStatus.PAID ? "paid" : "pending"}
+                  </span>
                 </div>
-                <div className="flex flex-col items-end justify-center">
-                  {formatTime(order.createdAt).time}
+                <div className="hidden sm:block">
+                  <div className="flex flex-col items-end justify-center">
+                    {formatTime(order.createdAt).date}
+                  </div>
+                  <div className="flex flex-col items-end justify-center">
+                    {formatTime(order.createdAt).time}
+                  </div>
                 </div>
-              </div>
-              <div className="text-center px-2 flex justify-end items-center">
-                <Link
-                  href={`/orders/${order.id}`}
-                  className={cn(
-                    "text-center border px-2 py-1 rounded-lg font-bold ",
-                    buttonVariants({ variant: "outline" }),
-                    "hover:border-primary hover:text-primary"
-                  )}
-                >
-                  Show order
-                </Link>
+                <div className="text-center px-2 flex justify-end items-center">
+                  <Link
+                    href={`/orders/${order.id}`}
+                    className={cn(
+                      "text-center border px-2 py-1 rounded-lg font-bold ",
+                      buttonVariants({ variant: "outline" }),
+                      "hover:border-primary hover:text-primary"
+                    )}
+                  >
+                    Show order
+                  </Link>
+                </div>
               </div>
             </div>
           ))}
